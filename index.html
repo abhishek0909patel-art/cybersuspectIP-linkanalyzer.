@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Threat Analyzer</title>
+    <style>
+        /* CSS for a Dark, Professional Cyber Theme */
+        body { 
+            background-color: #0a0e17; 
+            color: #d1d5db; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container { 
+            width: 100%;
+            max-width: 500px; 
+            padding: 30px; 
+            background: #111827; 
+            border-radius: 12px; 
+            border: 1px solid #1f2937; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        h2 { 
+            color: #3b82f6; 
+            text-align: center; 
+            margin-bottom: 5px;
+        }
+        p.subtitle {
+            text-align: center; 
+            font-size: 14px; 
+            color: #9ca3af; 
+            margin-bottom: 25px;
+        }
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            background: #1f2937; 
+            border: 1px solid #374151; 
+            color: white; 
+            border-radius: 6px; 
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background: #2563eb; 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: bold;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover { 
+            background: #1d4ed8; 
+        }
+        #result { 
+            margin-top: 20px; 
+            padding: 15px; 
+            border-radius: 6px; 
+            display: none; 
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .safe { 
+            background: rgba(16, 185, 129, 0.1); 
+            border: 1px solid #10b981; 
+            color: #34d399; 
+        }
+        .danger { 
+            background: rgba(239, 68, 68, 0.1); 
+            border: 1px solid #ef4444; 
+            color: #f87171; 
+        }
+        .loading {
+            text-align: center;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🛡️ Threat Analyzer</h2>
+        <p class="subtitle">Scan suspicious URLs or IP addresses for digital threats.</p>
+        
+        <input type="text" id="targetInput" placeholder="Enter IP or URL (e.g., http://xyz.com)">
+        <button onclick="analyzeTarget()">Start Scan</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // JavaScript for functionality
+        function analyzeTarget() {
+            const input = document.getElementById('targetInput').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            if(input === "") {
+                alert("Please enter a valid IP address or URL.");
+                return;
+            }
+
+            // Show loading state
+            resultDiv.style.display = "block";
+            resultDiv.className = "loading";
+            resultDiv.innerHTML = "Scanning database for potential threats... ⏳";
+
+            // Simulating a delay for the scanning process
+            setTimeout(() => {
+                // Basic logic to demonstrate safe vs danger results
+                if(input.toLowerCase().includes("http") || input.toLowerCase().includes("free") || input.toLowerCase().includes("offer")) {
+                    resultDiv.innerHTML = "<strong>Status:</strong> 🚨 High Risk Detected<br><strong>Category:</strong> Suspected Phishing Link<br><strong>Action:</strong> Do not open or share this link.";
+                    resultDiv.className = "danger";
+                } else {
+                    resultDiv.innerHTML = "<strong>Status:</strong> ✅ Clean<br><strong>Category:</strong> No Malicious Activity<br><strong>Action:</strong> Safe to proceed.";
+                    resultDiv.className = "safe";
+                }
+            }, 1800);
+        }
+    </script>
+
+</body>
+</html>
